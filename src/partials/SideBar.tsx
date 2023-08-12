@@ -1,7 +1,15 @@
-import { Box } from "@mui/material";
+import {
+  Box,
+  Menu,
+  MenuItem,
+  MenuList,
+  Typography,
+  Divider,
+} from "@mui/material";
 import React from "react";
 import UserData from "./UserData";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import CottageIcon from "@mui/icons-material/Cottage";
 const SideBar = () => {
   const [selectedTap, setSelectedTap] = React.useState("Home");
   return (
@@ -32,6 +40,35 @@ const SideBar = () => {
         <ArrowForwardIosIcon />
       </Box>
       <UserData />
+      <MenuList>
+        <MenuItem>
+          <CottageIcon />
+          <Typography variant="body1" color="initial">
+            Home
+          </Typography>
+        </MenuItem>
+        <MenuItem>
+          <CottageIcon />
+          <Typography variant="body1" color="initial">
+            My Calender
+          </Typography>
+        </MenuItem>
+      </MenuList>
+      <Divider />
+      <MenuList>
+        <MenuItem>
+          <CottageIcon />
+          <Typography variant="body1" color="initial">
+            Support
+          </Typography>
+        </MenuItem>
+        <MenuItem>
+          <CottageIcon />
+          <Typography variant="body1" color="initial">
+            Settings
+          </Typography>
+        </MenuItem>
+      </MenuList>
     </Box>
   );
 };
