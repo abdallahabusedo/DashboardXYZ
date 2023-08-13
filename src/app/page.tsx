@@ -1,5 +1,5 @@
 "use client";
-import WelcomePage from "@/WelcomePage";
+import WelcomePage from "@/pages/WelcomePage";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 

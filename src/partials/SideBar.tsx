@@ -14,7 +14,9 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import SettingsIcon from "@mui/icons-material/Settings";
 const SideBar = () => {
-  const [selectedTap, setSelectedTap] = React.useState("Home");
+  const [selectedTap, setSelectedTap] = React.useState<
+    "Home" | "Calender" | "Support" | "Settings"
+  >("Home");
 
   const menuItemStyle = {
     display: "flex",
@@ -33,18 +35,18 @@ const SideBar = () => {
   return (
     <Box
       sx={{
-        minHeight: "calc(100% - 100px)",
         display: "flex",
         flexDirection: "column",
         position: "relative",
         width: "370px",
         pl: "20px",
+        mt: "25px",
       }}
     >
       <Box
         sx={{
           position: "absolute",
-          right: 0,
+          right: -20,
           borderRadius: "100%",
           boxShadow: "0px 0px 15px 0px rgba(0,0,0,0.2)",
           width: "36px",
@@ -53,6 +55,8 @@ const SideBar = () => {
           justifyContent: "center",
           alignItems: "center",
           cursor: "pointer",
+          bgcolor: "white",
+          zIndex: "10",
         }}
       >
         <ArrowForwardIosIcon />

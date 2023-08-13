@@ -2,6 +2,7 @@ import React from "react";
 import NavBar from "./NavBar";
 import { Box } from "@mui/material";
 import SideBar from "./SideBar";
+import Footer from "./Footer";
 const DashboardLayout = ({ children }: any) => {
   return (
     <Box
@@ -14,23 +15,24 @@ const DashboardLayout = ({ children }: any) => {
       <Box
         sx={{
           display: "flex",
-          flex: "1",
-          mt: "100px",
-          height: "100%",
+          // height: "calc(100vh - 100px)",
         }}
       >
         <SideBar />
         <Box
           sx={{
-            bgcolor: "gray",
-            height: "calc(100% - 200px)",
-            minHeight: "100%",
+            bgcolor: "#EDEDED",
+            // minHeight: "calc(100vh - 100px)",
+            height: "100%",
             width: "100%",
+            pl: "30px",
+            pb: "30px",
           }}
         >
           {children}
         </Box>
       </Box>
+      <Footer />
     </Box>
   );
 };

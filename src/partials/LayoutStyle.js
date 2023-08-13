@@ -5,10 +5,6 @@ export const NavBarContainer = {
   color: "black",
   justifyContent: "center",
   alignItems: "center",
-  position: "fixed",
-  top: 0,
-  width: "100%",
-  marginBottom: "100px",
 };
 
 export const LogoBox = {
@@ -28,7 +24,8 @@ export const SearchBox = {
 
 export const searchInput = {
   m: 1,
-  width: "500px",
+  width: "100%",
+  maxWidth: "500px",
   bgcolor: "#F6F6F6",
   border: "1px solid #EDEDED",
   borderRadius: "10px",
@@ -48,7 +45,6 @@ export const userData = {
   alignItems: "center",
   gap: "10px",
   marginRight: "40px",
-  height: "100%",
 };
 
 export const TextPrim = {
@@ -61,4 +57,10 @@ export const textSec = {
   color: "black",
   fontSize: "14px",
   fontWeight: "400",
+};
+
+export const UpperContainer = {
+  bgcolor: "white",
+  padding: "29px 25px",
+  borderRadius: "15px",
 };
