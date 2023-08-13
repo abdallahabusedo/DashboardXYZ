@@ -9,9 +9,27 @@ import {
 import React from "react";
 import UserData from "./UserData";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import CottageIcon from "@mui/icons-material/Cottage";
+import CottageOutlinedIcon from "@mui/icons-material/CottageOutlined";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import SupportAgentIcon from "@mui/icons-material/SupportAgent";
+import SettingsIcon from "@mui/icons-material/Settings";
 const SideBar = () => {
   const [selectedTap, setSelectedTap] = React.useState("Home");
+
+  const menuItemStyle = {
+    display: "flex",
+    gap: "15px",
+    padding: "14px 20px",
+    transition: "all 0.2s ease-in-out",
+    ":hover": {
+      bgcolor: "#222222aa",
+      color: "white",
+    },
+  };
+  const menuTextStyle = {
+    fontSize: "18px",
+    fontWeight: "600",
+  };
   return (
     <Box
       sx={{
@@ -41,32 +59,53 @@ const SideBar = () => {
       </Box>
       <UserData />
       <MenuList>
-        <MenuItem>
-          <CottageIcon />
-          <Typography variant="body1" color="initial">
-            Home
-          </Typography>
+        <MenuItem
+          sx={{
+            ...menuItemStyle,
+            mt: "20px",
+            bgcolor: selectedTap == "Home" ? "#222222" : "white",
+            color: selectedTap == "Home" ? "white" : "black",
+          }}
+          onClick={() => setSelectedTap("Home")}
+        >
+          <CottageOutlinedIcon />
+          <Typography sx={menuTextStyle}>Home</Typography>
         </MenuItem>
-        <MenuItem>
-          <CottageIcon />
-          <Typography variant="body1" color="initial">
-            My Calender
-          </Typography>
+        <MenuItem
+          sx={{
+            ...menuItemStyle,
+            bgcolor: selectedTap == "Calender" ? "#222222" : "white",
+            color: selectedTap == "Calender" ? "white" : "black",
+          }}
+          onClick={() => setSelectedTap("Calender")}
+        >
+          <CalendarMonthIcon />
+          <Typography sx={menuTextStyle}>My Calender</Typography>
         </MenuItem>
       </MenuList>
       <Divider />
       <MenuList>
-        <MenuItem>
-          <CottageIcon />
-          <Typography variant="body1" color="initial">
-            Support
-          </Typography>
+        <MenuItem
+          sx={{
+            ...menuItemStyle,
+            bgcolor: selectedTap == "Support" ? "#222222" : "white",
+            color: selectedTap == "Support" ? "white" : "black",
+          }}
+          onClick={() => setSelectedTap("Support")}
+        >
+          <SupportAgentIcon />
+          <Typography sx={menuTextStyle}>Support</Typography>
         </MenuItem>
-        <MenuItem>
-          <CottageIcon />
-          <Typography variant="body1" color="initial">
-            Settings
-          </Typography>
+        <MenuItem
+          sx={{
+            ...menuItemStyle,
+            bgcolor: selectedTap == "Settings" ? "#222222" : "white",
+            color: selectedTap == "Settings" ? "white" : "black",
+          }}
+          onClick={() => setSelectedTap("Settings")}
+        >
+          <SettingsIcon />
+          <Typography sx={menuTextStyle}>Settings</Typography>
         </MenuItem>
       </MenuList>
     </Box>
