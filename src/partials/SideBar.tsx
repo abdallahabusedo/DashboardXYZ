@@ -57,6 +57,7 @@ const SideBar = () => {
           cursor: "pointer",
           bgcolor: "white",
           zIndex: "10",
+          rotate: "180deg",
         }}
       >
         <ArrowForwardIosIcon />

@@ -3,12 +3,13 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface InterviewState {
   interviews: any;
+  currentInterviewIndex: number;
 }
 
 const initialState: InterviewState = {
   interviews: [
     {
-      id: "1",
+      id: "0",
       image: "/interview1.png",
       Title: "Interview With Microsoft",
       interviewDate: new Date("Tuesday 17, August 2023  8:00 PM").toISOString(),
@@ -37,7 +38,7 @@ const initialState: InterviewState = {
         "Lorem ipsum dolor sit amet consectetur. Mus nibh ornare facilisis commodo fermentum. Nibh dui malesuada pulvinar ut donec morbi id.",
     },
     {
-      id: "2",
+      id: "1",
       image: "/interview2.png",
       Title: "Meeting with QNB",
       interviewDate: new Date("Tuesday 17, August 2023  8:00 PM").toISOString(),
@@ -66,7 +67,7 @@ const initialState: InterviewState = {
         "Lorem ipsum dolor sit amet consectetur. Mus nibh ornare facilisis commodo fermentum. Nibh dui malesuada pulvinar ut donec morbi id.",
     },
     {
-      id: "3",
+      id: "2",
       image: "/interview1.png",
       Title: "Interview With Microsoft",
       interviewDate: new Date("Tuesday 17, August 2023  8:00 PM").toISOString(),
@@ -107,7 +108,7 @@ const initialState: InterviewState = {
         "Lorem ipsum dolor sit amet consectetur. Mus nibh ornare facilisis commodo fermentum. Nibh dui malesuada pulvinar ut donec morbi id.",
     },
     {
-      id: "4",
+      id: "3",
       image: "/interview1.png",
       Title: "Interview With Microsoft",
       interviewDate: new Date("Tuesday 17, August 2023  8:00 PM").toISOString(),
@@ -136,13 +137,18 @@ const initialState: InterviewState = {
         "Lorem ipsum dolor sit amet consectetur. Mus nibh ornare facilisis commodo fermentum. Nibh dui malesuada pulvinar ut donec morbi id.",
     },
   ],
+  currentInterviewIndex: 0,
 };
 
 export const interviewSlice = createSlice({
   name: "interview",
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentInterviewIndex: (state, action: PayloadAction<number>) => {
+      state.currentInterviewIndex = action.payload;
+    },
+  },
 });
 
-export const {} = interviewSlice.actions;
+export const { setCurrentInterviewIndex } = interviewSlice.actions;
 export default interviewSlice.reducer;

@@ -1,10 +1,23 @@
-import React from "react";
-import { Box, TextField, Typography } from "@mui/material";
-import Image from "next/image";
-import { addHours, addMinutes, format } from "date-fns";
+import { setCurrentInterviewIndex } from "@/app/redux/slices/interviewSlice";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import PlaceIcon from "@mui/icons-material/Place";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
+import PlaceIcon from "@mui/icons-material/Place";
+import { Box, Typography } from "@mui/material";
+import { addMinutes } from "date-fns";
+import Image from "next/image";
+import React from "react";
+import { useDispatch } from "react-redux";
+import {
+  interviewAttendeesContainer,
+  interviewItemContainer,
+  interviewLeftSideBoxContainer,
+  interviewMinDetails,
+  interviewText,
+  interviewTimeBox,
+  plusAttendees,
+  primTextInterview,
+  secTextInterview,
+} from "./InterviewListStyle";
 const InterviewItem = ({
   interview,
   selectedInterview,
@@ -22,7 +35,7 @@ const InterviewItem = ({
     })
   );
   let isCurrentSelected = selectedInterview == interview.id;
-
+  const dispatch = useDispatch();
   React.useEffect(() => {
     setFormateDate(
       new Date(interview.interviewDate).toLocaleString("en-US", {
@@ -48,91 +61,47 @@ const InterviewItem = ({
   return (
     <Box
       sx={{
-        display: "flex",
+        ...interviewItemContainer,
         bgcolor: isCurrentSelected ? "#222" : "#fff",
         color: isCurrentSelected ? "#fff" : "#000",
-        width: "420px",
-        borderRadius: "10px",
-        border: "1px solid #EDEDED",
-        padding: "15px",
-        gap: "10px",
-        justifyContent: "center",
-        cursor: "pointer",
-        // alignItems: "flex-start",
       }}
-      onClick={() => setSelectedInterview(interview.id)}
+      onClick={() => {
+        setSelectedInterview(interview.id);
+        dispatch(setCurrentInterviewIndex(interview.id));
+      }}
     >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "10px",
-          minWidth: "62px",
-        }}
-      >
+      <Box sx={interviewLeftSideBoxContainer}>
         <Image src={interview.image} width={50} height={50} alt="missing" />
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "5px",
-          }}
-        >
-          <Typography sx={{ fontSize: "14px", fontWeight: "600" }}>
+        <Box sx={interviewTimeBox}>
+          <Typography sx={interviewText}>
             {new Date(interview.interviewDate).toLocaleString("en-US", {
               hour: "2-digit",
               minute: "2-digit",
               hour12: true,
             })}
           </Typography>
-          <Typography
-            sx={{ fontSize: "14px", fontWeight: "600", color: "#A5A5A5" }}
-          >
+          <Typography sx={{ ...interviewText, color: "#A5A5A5" }}>
             {interview.duration / 60} Hours
           </Typography>
         </Box>
       </Box>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "start",
-          alignItems: "start",
-          gap: "5px",
-        }}
-      >
-        <Typography sx={{ fontSize: "16px", fontWeight: "600" }}>
-          {interview.Title}
-        </Typography>
-        <Typography
-          sx={{ fontSize: "13px", fontWeight: "400", color: "#A5A5A5" }}
-        >
+      <Box sx={interviewMinDetails}>
+        <Typography sx={primTextInterview}>{interview.Title}</Typography>
+        <Typography sx={secTextInterview}>
           <CalendarMonthIcon fontSize="small" sx={{ mr: "4px" }} />
           {formateDate}
         </Typography>
-        <Typography
-          sx={{ fontSize: "13px", fontWeight: "400", color: "#A5A5A5" }}
-        >
+        <Typography sx={secTextInterview}>
           <PlaceIcon fontSize="small" sx={{ mr: "4px" }} />
           {interview.location}
         </Typography>
-        <Typography
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-          }}
-        >
+        <Typography sx={interviewAttendeesContainer}>
           <PeopleOutlineIcon fontSize="small" />
           {interview.attendees
             .slice(0, 3)
             .map((attendant: any, index: number) => {
               return (
-                <Box sx={{ borderRadius: "100px" }}>
+                <Box sx={{ borderRadius: "100px" }} key={index}>
                   <Image
                     src={attendant.profilePic}
                     width={25}
@@ -146,14 +115,9 @@ const InterviewItem = ({
           {interview.attendees.length > 3 && (
             <Box
               sx={{
-                borderRadius: "100px",
-                width: "25px",
-                height: "25px",
+                ...plusAttendees,
                 bgcolor: isCurrentSelected ? "white" : "black",
                 color: isCurrentSelected ? "black" : "white",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
               }}
             >
               +{interview.attendees.length - 3}

@@ -1,25 +1,24 @@
-import React from "react";
-import { Box, TextField } from "@mui/material";
 import { SearchBox, UpperContainer, searchInput } from "@/partials/LayoutStyle";
 import SearchIcon from "@mui/icons-material/Search";
+import { Box, TextField } from "@mui/material";
+import React from "react";
 import { useSelector } from "react-redux";
 import InterviewItem from "./InterviewItem";
+import {
+  interviewListContainer,
+  interviewListUpperContainer,
+} from "./InterviewListStyle";
 
 const InterviewList = () => {
   const interviewStore = useSelector((state: any) => state.interview);
-  const [selectedInterview, setSelectedInterview] = React.useState(1);
-  console.log(interviewStore);
-
+  const [selectedInterview, setSelectedInterview] = React.useState(
+    interviewStore?.currentInterviewIndex
+  );
   return (
     <Box
       sx={{
         ...UpperContainer,
-        width: "460px",
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
+        ...interviewListUpperContainer,
       }}
     >
       {/* Search Bar */}
@@ -34,13 +33,7 @@ const InterviewList = () => {
           }}
         />
       </Box>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "10px",
-        }}
-      >
+      <Box sx={interviewListContainer}>
         {interviewStore.interviews.map((interview: any, index: number) => {
           return (
             <InterviewItem
