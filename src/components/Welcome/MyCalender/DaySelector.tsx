@@ -21,10 +21,6 @@ const DaySelector = ({ setToday, today }: any) => {
     setToday((prev: any) => addDays(prev, Enm));
   };
   const [showCalender, setShowCalender] = React.useState(false);
-  React.useEffect(() => {
-    console.log(date);
-    setShowCalender(!showCalender);
-  }, [date]);
   return (
     <Box sx={daySelectorContainer}>
       <Image
