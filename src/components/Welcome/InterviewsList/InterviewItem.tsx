@@ -18,6 +18,7 @@ import {
   primTextInterview,
   secTextInterview,
 } from "./InterviewListStyle";
+import { useAppDispatch } from "@/app/redux/slices/hook";
 const InterviewItem = ({
   interview,
   selectedInterview,
@@ -35,7 +36,7 @@ const InterviewItem = ({
     })
   );
   let isCurrentSelected = selectedInterview == interview.id;
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   React.useEffect(() => {
     setFormateDate(
       new Date(interview.interviewDate).toLocaleString("en-US", {

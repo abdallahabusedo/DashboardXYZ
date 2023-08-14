@@ -8,9 +8,10 @@ import {
   interviewListContainer,
   interviewListUpperContainer,
 } from "./InterviewListStyle";
+import { useAppSelector } from "@/app/redux/slices/hook";
 
 const InterviewList = () => {
-  const interviewStore = useSelector((state: any) => state.interview);
+  const interviewStore = useAppSelector((state: any) => state.interview);
   const [selectedInterview, setSelectedInterview] = React.useState(
     interviewStore?.currentInterviewIndex
   );

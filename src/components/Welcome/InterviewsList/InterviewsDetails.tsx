@@ -18,8 +18,9 @@ import { useSelector } from "react-redux";
 import { format } from "date-fns";
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
 import React from "react";
+import { useAppSelector } from "@/app/redux/slices/hook";
 const InterviewsDetails = () => {
-  const interviewStore = useSelector((state: any) => state.interview);
+  const interviewStore = useAppSelector((state: any) => state.interview);
   let interview =
     interviewStore.interviews[interviewStore?.currentInterviewIndex];
   console.log(interviewStore.interviews[interviewStore?.currentInterviewIndex]);
