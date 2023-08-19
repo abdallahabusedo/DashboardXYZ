@@ -23,8 +23,9 @@ const DashboardLayout = ({ children }: any) => {
           sx={{
             bgcolor: "#EDEDED",
             // minHeight: "calc(100vh - 100px)",
+            width: "100%",
             height: "100%",
-            pl: "30px",
+            px: "30px",
             pb: "30px",
             overflow: "hidden",
           }}
