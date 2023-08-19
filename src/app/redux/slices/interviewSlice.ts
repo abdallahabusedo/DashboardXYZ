@@ -12,7 +12,7 @@ const initialState: InterviewState = {
       id: "0",
       image: "/interview1.png",
       Title: "Interview With Microsoft",
-      interviewDate: "Tuesday 17, August 2023  8:00 PM",
+      interviewDate: "Tue August 17 2023 20:00:00",
       location: "New Jersey, United States",
       attendees: [
         {
@@ -41,7 +41,7 @@ const initialState: InterviewState = {
       id: "1",
       image: "/interview2.png",
       Title: "Meeting with QNB",
-      interviewDate: "Tuesday 17, August 2023  8:00 PM",
+      interviewDate: "Tue August 17 2023 20:00:00",
       location: "New Jersey, United States",
       attendees: [
         {
@@ -70,7 +70,7 @@ const initialState: InterviewState = {
       id: "2",
       image: "/interview1.png",
       Title: "Interview With Microsoft",
-      interviewDate: "Tuesday 17, August 2023  8:00 PM",
+      interviewDate: "Tue August 17 2023 20:00:00",
       location: "New Jersey, United States",
       attendees: [
         {
@@ -111,7 +111,7 @@ const initialState: InterviewState = {
       id: "3",
       image: "/interview1.png",
       Title: "Interview With Microsoft",
-      interviewDate: "Tuesday 17, August 2023  8:00 PM",
+      interviewDate: "Tue August 17 2023 20:00:00",
       location: "New Jersey, United States",
       attendees: [
         {

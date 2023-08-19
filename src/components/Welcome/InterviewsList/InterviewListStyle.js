@@ -6,6 +6,7 @@ export const interviewsContainer = {
 
 export const interviewListUpperContainer = {
   width: "460px",
+  height: "100vh",
   display: "flex",
   flexDirection: "column",
   justifyContent: "start",
