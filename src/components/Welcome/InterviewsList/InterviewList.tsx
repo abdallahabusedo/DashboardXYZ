@@ -22,7 +22,7 @@ const InterviewList = () => {
       }}
     >
       {/* Search Bar */}
-      <Box sx={{ ...SearchBox, width: "100%", mr: "10px" }}>
+      <Box sx={{ width: "100%", mr: "10px" }}>
         <TextField
           id="outlined-start-adornment"
           placeholder="Search"
