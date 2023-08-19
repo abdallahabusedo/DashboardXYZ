@@ -28,10 +28,12 @@ const InterviewsDetails = () => {
         hour12: true,
       })
     );
-    setDay(format(new Date(interview.interviewDate), "EEEE"));
-    setDayDate(format(new Date(interview.interviewDate), "dd"));
-    setMonth(format(new Date(interview.interviewDate), "MMMM"));
-    setYear(format(new Date(interview.interviewDate), "yyyy"));
+    // console.log(interview.interviewDate);
+
+    setDay(format(new Date(interview?.interviewDate), "EEEE"));
+    setDayDate(format(new Date(interview?.interviewDate), "dd"));
+    setMonth(format(new Date(interview?.interviewDate), "MMMM"));
+    setYear(format(new Date(interview?.interviewDate), "yyyy"));
   }, [interview]);
   return (
     <Box
@@ -321,7 +323,6 @@ const InterviewsDetails = () => {
           Meeting Agenda & Remarks:
         </Typography>
         <TextField
-          placeholder="MultiLine with rows: 2 and rowsMax: 4"
           multiline
           fullWidth
           value={
