@@ -1,14 +1,13 @@
+import { useAppSelector } from "@/app/redux/slices/hook";
 import { SearchBox, UpperContainer, searchInput } from "@/partials/LayoutStyle";
 import SearchIcon from "@mui/icons-material/Search";
 import { Box, TextField } from "@mui/material";
 import React from "react";
-import { useSelector } from "react-redux";
 import InterviewItem from "./InterviewItem";
 import {
   interviewListContainer,
   interviewListUpperContainer,
 } from "./InterviewListStyle";
-import { useAppSelector } from "@/app/redux/slices/hook";
 
 const InterviewList = () => {
   const interviewStore = useAppSelector((state: any) => state.interview);

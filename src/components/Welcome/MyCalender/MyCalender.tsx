@@ -3,13 +3,13 @@ import { Box, Divider, Typography } from "@mui/material";
 import React from "react";
 import SelectPeriodButtons from "./SelectPeriodButtons";
 
+import { UpperContainer } from "@/partials/LayoutStyle";
 import DaySelector from "./DaySelector";
 import {
   myCalenderInnerContainer,
   myCalenderText,
   myCalenderTitleContainer,
 } from "./MyCalenderStyles";
-import { UpperContainer } from "@/partials/LayoutStyle";
 const MyCalender = () => {
   const [selectedPeriod, setSelectedPeriod] = React.useState<
     "Day" | "Week" | "Month"

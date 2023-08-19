@@ -1,30 +1,38 @@
+import { useAppSelector } from "@/app/redux/slices/hook";
 import { UpperContainer } from "@/partials/LayoutStyle";
-import {
-  Box,
-  Typography,
-  TextField,
-  Menu,
-  MenuItem,
-  Button,
-} from "@mui/material";
+import { Box, Menu, MenuItem, TextField, Typography } from "@mui/material";
+import { format } from "date-fns";
+import PopupState, { bindMenu, bindTrigger } from "material-ui-popup-state";
+import Image from "next/image";
+import React from "react";
 import {
   interviewDetailsContainer,
   interviewLeftSideBoxContainer,
   interviewText,
   interviewTimeBox,
 } from "./InterviewListStyle";
-import Image from "next/image";
-import { useSelector } from "react-redux";
-import { format } from "date-fns";
-import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
-import React from "react";
-import { useAppSelector } from "@/app/redux/slices/hook";
 const InterviewsDetails = () => {
   const interviewStore = useAppSelector((state: any) => state.interview);
   let interview =
     interviewStore.interviews[interviewStore?.currentInterviewIndex];
-  console.log(interviewStore.interviews[interviewStore?.currentInterviewIndex]);
-
+  const [interviewTime, setInterviewTime] = React.useState("");
+  const [day, setDay] = React.useState("");
+  const [dayDate, setDayDate] = React.useState("");
+  const [month, setMonth] = React.useState("");
+  const [year, setYear] = React.useState("");
+  React.useEffect(() => {
+    setInterviewTime(
+      new Date(interview.interviewDate).toLocaleString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      })
+    );
+    setDay(format(new Date(interview.interviewDate), "EEEE"));
+    setDayDate(format(new Date(interview.interviewDate), "dd"));
+    setMonth(format(new Date(interview.interviewDate), "MMMM"));
+    setYear(format(new Date(interview.interviewDate), "yyyy"));
+  }, [interview]);
   return (
     <Box
       sx={{
@@ -45,7 +53,7 @@ const InterviewsDetails = () => {
       </Box>
       <PopupState variant="popover" popupId="demo-popup-menu">
         {(popupState) => (
-          <React.Fragment>
+          <Box>
             <Box
               {...bindTrigger(popupState)}
               sx={{
@@ -125,7 +133,7 @@ const InterviewsDetails = () => {
                 Send Reminder
               </MenuItem>
             </Menu>
-          </React.Fragment>
+          </Box>
         )}
       </PopupState>
       <Box
@@ -137,13 +145,7 @@ const InterviewsDetails = () => {
         <Box sx={interviewLeftSideBoxContainer}>
           <Image src={interview.image} width={50} height={50} alt="missing" />
           <Box sx={interviewTimeBox}>
-            <Typography sx={interviewText}>
-              {new Date(interview.interviewDate).toLocaleString("en-US", {
-                hour: "2-digit",
-                minute: "2-digit",
-                hour12: true,
-              })}
-            </Typography>
+            <Typography sx={interviewText}>{interviewTime}</Typography>
             <Typography sx={{ ...interviewText, color: "#A5A5A5" }}>
               {interview.duration / 60} Hours
             </Typography>
@@ -164,7 +166,7 @@ const InterviewsDetails = () => {
               fontWeight: "600",
             }}
           >
-            {format(new Date(interview.interviewDate), "EEEE")}
+            {day}
           </Typography>
           <Typography
             sx={{
@@ -172,7 +174,7 @@ const InterviewsDetails = () => {
               fontWeight: "600",
             }}
           >
-            {format(new Date(interview.interviewDate), "dd")}
+            {dayDate}
           </Typography>
           <Typography
             sx={{
@@ -181,7 +183,7 @@ const InterviewsDetails = () => {
               fontWeight: "600",
             }}
           >
-            {format(new Date(interview.interviewDate), "MMMM")}
+            {month}
           </Typography>
           <Typography
             sx={{
@@ -190,7 +192,7 @@ const InterviewsDetails = () => {
               fontWeight: "600",
             }}
           >
-            {format(new Date(interview.interviewDate), "yyyy")}
+            {year}
           </Typography>
         </Box>
         <Box
@@ -323,7 +325,7 @@ const InterviewsDetails = () => {
           multiline
           fullWidth
           value={
-            "Lorem ipsum dolor sit amet consectetur. Musasdasdasdsa nibh ornare facilisis commodo fermentum. Nibh dui malesuada pulvinar ut donec morbi id."
+            "Lorem ipsum dolor sit amet consectetur. Musasdasdasdsa nibh ornare facilisis commodo fermentum. Nibh dui malesuada pulvinar ut donec morbi."
           }
         />
       </Box>
@@ -364,6 +366,7 @@ const InterviewsDetails = () => {
             interview.attendees.map((attendant: any, index: number) => {
               return (
                 <Box
+                  key={index}
                   sx={{
                     display: "flex",
                     alignItems: "center",

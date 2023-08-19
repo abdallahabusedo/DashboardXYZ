@@ -2,6 +2,10 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { Box, Typography } from "@mui/material";
 import { addDays, format } from "date-fns";
 import Image from "next/image";
+import React from "react";
+import { Calendar } from "react-date-range";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
 import {
   createMeetingButton,
   dateContainer,
@@ -10,16 +14,21 @@ import {
   daySelectorContainer,
   todayButton,
 } from "./MyCalenderStyles";
-import React from "react";
-import { Calendar } from "react-date-range";
-import "react-date-range/dist/styles.css";
-import "react-date-range/dist/theme/default.css";
 
 const DaySelector = ({ setToday, today }: any) => {
-  const [date, setDate] = React.useState<any>(today);
   const getNextORPrevDay = (Enm: number) => {
     setToday((prev: any) => addDays(prev, Enm));
   };
+  const [day, setDay] = React.useState("");
+  const [dayDate, setDayDate] = React.useState("");
+  const [month, setMonth] = React.useState("");
+  const [year, setYear] = React.useState("");
+  React.useEffect(() => {
+    setDay(format(today, "EEEE"));
+    setDayDate(format(today, "dd"));
+    setMonth(format(today, "MMMM"));
+    setYear(format(today, "yyyy"));
+  }, [today]);
   const [showCalender, setShowCalender] = React.useState(false);
   return (
     <Box sx={daySelectorContainer}>
@@ -36,10 +45,10 @@ const DaySelector = ({ setToday, today }: any) => {
         onClick={() => setShowCalender(!showCalender)}
       >
         <CalendarMonthIcon sx={{ color: "gray" }} />
-        <Typography sx={dateTextPrim}>{format(today, "EEEE")}</Typography>
-        <Typography sx={dateTextSec}>{format(today, "dd")}</Typography>
-        <Typography sx={dateTextPrim}>{format(today, "MMMM")}</Typography>
-        <Typography sx={dateTextPrim}>{format(today, "yyyy")}</Typography>
+        <Typography sx={dateTextPrim}>{day}</Typography>
+        <Typography sx={dateTextSec}>{dayDate}</Typography>
+        <Typography sx={dateTextPrim}>{month}</Typography>
+        <Typography sx={dateTextPrim}>{year}</Typography>
         <Box
           sx={{
             position: "absolute",

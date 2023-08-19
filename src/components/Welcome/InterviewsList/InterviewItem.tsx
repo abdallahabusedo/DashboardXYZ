@@ -1,3 +1,4 @@
+import { useAppDispatch } from "@/app/redux/slices/hook";
 import { setCurrentInterviewIndex } from "@/app/redux/slices/interviewSlice";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
@@ -6,7 +7,6 @@ import { Box, Typography } from "@mui/material";
 import { addMinutes } from "date-fns";
 import Image from "next/image";
 import React from "react";
-import { useDispatch } from "react-redux";
 import {
   interviewAttendeesContainer,
   interviewItemContainer,
@@ -18,23 +18,13 @@ import {
   primTextInterview,
   secTextInterview,
 } from "./InterviewListStyle";
-import { useAppDispatch } from "@/app/redux/slices/hook";
 const InterviewItem = ({
   interview,
   selectedInterview,
   setSelectedInterview,
 }: any) => {
-  const [formateDate, setFormateDate] = React.useState(
-    new Date(interview.interviewDate).toLocaleString("en-US", {
-      weekday: "long",
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true,
-    })
-  );
+  const [formateDate, setFormateDate] = React.useState("");
+  const [interviewTime, setInterviewTime] = React.useState("");
   let isCurrentSelected = selectedInterview == interview.id;
   const dispatch = useAppDispatch();
   React.useEffect(() => {
@@ -58,7 +48,15 @@ const InterviewItem = ({
           hour12: true,
         })
     );
-  }, []);
+
+    setInterviewTime(
+      new Date(interview.interviewDate).toLocaleString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      })
+    );
+  }, [interview]);
   return (
     <Box
       sx={{
@@ -74,13 +72,7 @@ const InterviewItem = ({
       <Box sx={interviewLeftSideBoxContainer}>
         <Image src={interview.image} width={50} height={50} alt="missing" />
         <Box sx={interviewTimeBox}>
-          <Typography sx={interviewText}>
-            {new Date(interview.interviewDate).toLocaleString("en-US", {
-              hour: "2-digit",
-              minute: "2-digit",
-              hour12: true,
-            })}
-          </Typography>
+          <Typography sx={interviewText}>{interviewTime}</Typography>
           <Typography sx={{ ...interviewText, color: "#A5A5A5" }}>
             {interview.duration / 60} Hours
           </Typography>
@@ -96,7 +88,7 @@ const InterviewItem = ({
           <PlaceIcon fontSize="small" sx={{ mr: "4px" }} />
           {interview.location}
         </Typography>
-        <Typography sx={interviewAttendeesContainer}>
+        <Box sx={interviewAttendeesContainer}>
           <PeopleOutlineIcon fontSize="small" />
           {interview.attendees
             .slice(0, 3)
@@ -124,7 +116,7 @@ const InterviewItem = ({
               +{interview.attendees.length - 3}
             </Box>
           )}
-        </Typography>
+        </Box>
       </Box>
     </Box>
   );
