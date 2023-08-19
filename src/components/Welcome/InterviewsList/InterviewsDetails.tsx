@@ -60,7 +60,7 @@ const InterviewsDetails = () => {
       // console.log(interview.interviewDate);
 
       setDay(daysofweek[new Date(currentInterview.interviewDate).getDay()]);
-      setDayDate(new Date(currentInterview.interviewDate).getDay().toString());
+      setDayDate(new Date(currentInterview.interviewDate).getDate().toString());
       setMonth(months[new Date(currentInterview.interviewDate).getMonth()]);
       setYear(
         new Date(currentInterview.interviewDate).getFullYear().toString()
