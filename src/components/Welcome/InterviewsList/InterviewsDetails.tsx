@@ -25,6 +25,15 @@ const InterviewsDetails = () => {
       interviewStore.interviews[interviewStore?.currentInterviewIndex]
     );
   }, [interviewStore]);
+  const daysofweek = [
+    "Saturday",
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+  ];
   React.useEffect(() => {
     if (currentInterview) {
       setInterviewTime(
@@ -36,7 +45,7 @@ const InterviewsDetails = () => {
       );
       // console.log(interview.interviewDate);
 
-      setDay(format(new Date(currentInterview?.interviewDate), "EEEE"));
+      setDay(daysofweek[new Date(currentInterview?.interviewDate).getDay()]);
       setDayDate(format(new Date(currentInterview?.interviewDate), "dd"));
       setMonth(format(new Date(currentInterview?.interviewDate), "MMMM"));
       setYear(format(new Date(currentInterview?.interviewDate), "yyyy"));
