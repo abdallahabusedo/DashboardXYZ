@@ -1,5 +1,5 @@
 import { useAppSelector } from "@/app/redux/slices/hook";
-import { SearchBox, UpperContainer, searchInput } from "@/partials/LayoutStyle";
+import { UpperContainer, searchInput } from "@/partials/LayoutStyle";
 import SearchIcon from "@mui/icons-material/Search";
 import { Box, TextField } from "@mui/material";
 import React from "react";

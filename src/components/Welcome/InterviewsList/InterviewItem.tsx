@@ -60,6 +60,7 @@ const InterviewItem = ({
   return (
     <Box
       sx={{
+        mx: "10px",
         ...interviewItemContainer,
         bgcolor: isCurrentSelected ? "#222" : "#fff",
         color: isCurrentSelected ? "#fff" : "#000",
