@@ -16,7 +16,7 @@ const MyCalender = () => {
   >("Day");
   const [today, setToday] = React.useState(new Date());
   return (
-    <Box sx={{ ...UpperContainer, mt: "35px", width: "1175px" }}>
+    <Box sx={{ ...UpperContainer, mt: "35px" }}>
       <Box sx={myCalenderInnerContainer}>
         <Box sx={myCalenderTitleContainer}>
           <CalendarMonthIcon sx={{ color: "gray" }} />

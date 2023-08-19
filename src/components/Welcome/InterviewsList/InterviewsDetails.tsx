@@ -13,28 +13,35 @@ import {
 } from "./InterviewListStyle";
 const InterviewsDetails = () => {
   const interviewStore = useAppSelector((state: any) => state.interview);
-  let interview =
-    interviewStore.interviews[interviewStore?.currentInterviewIndex];
   const [interviewTime, setInterviewTime] = React.useState("");
+  const [currentInterview, setCurrentInterview] = React.useState<any>();
   const [day, setDay] = React.useState("");
+
   const [dayDate, setDayDate] = React.useState("");
   const [month, setMonth] = React.useState("");
   const [year, setYear] = React.useState("");
   React.useEffect(() => {
-    setInterviewTime(
-      new Date(interview.interviewDate).toLocaleString("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true,
-      })
+    setCurrentInterview(
+      interviewStore.interviews[interviewStore?.currentInterviewIndex]
     );
-    // console.log(interview.interviewDate);
+  }, [interviewStore]);
+  React.useEffect(() => {
+    if (currentInterview) {
+      setInterviewTime(
+        new Date(currentInterview.interviewDate).toLocaleString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true,
+        })
+      );
+      // console.log(interview.interviewDate);
 
-    setDay(format(new Date(interview?.interviewDate), "EEEE"));
-    setDayDate(format(new Date(interview?.interviewDate), "dd"));
-    setMonth(format(new Date(interview?.interviewDate), "MMMM"));
-    setYear(format(new Date(interview?.interviewDate), "yyyy"));
-  }, [interview]);
+      setDay(format(new Date(currentInterview?.interviewDate), "EEEE"));
+      setDayDate(format(new Date(currentInterview?.interviewDate), "dd"));
+      setMonth(format(new Date(currentInterview?.interviewDate), "MMMM"));
+      setYear(format(new Date(currentInterview?.interviewDate), "yyyy"));
+    }
+  }, [currentInterview]);
   return (
     <Box
       sx={{
@@ -145,11 +152,16 @@ const InterviewsDetails = () => {
         }}
       >
         <Box sx={interviewLeftSideBoxContainer}>
-          <Image src={interview.image} width={50} height={50} alt="missing" />
+          <Image
+            src={currentInterview?.image}
+            width={50}
+            height={50}
+            alt="missing"
+          />
           <Box sx={interviewTimeBox}>
             <Typography sx={interviewText}>{interviewTime}</Typography>
             <Typography sx={{ ...interviewText, color: "#A5A5A5" }}>
-              {interview.duration / 60} Hours
+              {currentInterview?.duration / 60} Hours
             </Typography>
           </Box>
         </Box>
@@ -210,7 +222,7 @@ const InterviewsDetails = () => {
               fontWeight: "600",
             }}
           >
-            {interview.Title}
+            {currentInterview?.Title}
           </Typography>
           <Typography
             sx={{
@@ -228,7 +240,7 @@ const InterviewsDetails = () => {
             >
               Organizer
             </span>
-            {interview.organizer}
+            {currentInterview?.organizer}
           </Typography>
           <Typography
             sx={{
@@ -246,7 +258,7 @@ const InterviewsDetails = () => {
             >
               Meeting Type
             </span>{" "}
-            {interview.meetingType}
+            {currentInterview?.meetingType}
           </Typography>
           <Typography
             sx={{
@@ -264,7 +276,7 @@ const InterviewsDetails = () => {
             >
               Meeting Format
             </span>{" "}
-            {interview.meetingFormat}
+            {currentInterview?.meetingFormat}
           </Typography>
         </Box>
       </Box>
@@ -306,7 +318,7 @@ const InterviewsDetails = () => {
                 fontWeight: "500",
               }}
             >
-              {interview.meetingLink}
+              {currentInterview?.meetingLink}
             </Typography>
           </Box>
           <Image src="/copy.png" width={20} height={20} alt="missing" />
@@ -353,7 +365,7 @@ const InterviewsDetails = () => {
               borderRadius: "100px",
             }}
           >
-            {interview.attendees.length}
+            {currentInterview?.attendees.length}
           </Typography>
         </Box>
         <Box
@@ -363,8 +375,8 @@ const InterviewsDetails = () => {
             gap: "10px",
           }}
         >
-          {interview.attendees &&
-            interview.attendees.map((attendant: any, index: number) => {
+          {currentInterview?.attendees &&
+            currentInterview.attendees.map((attendant: any, index: number) => {
               return (
                 <Box
                   key={index}
